@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sign Up — Amora Events</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+      <table width="100%" bgcolor="#A865C9">
+        <tr>
+            <td>
+                <marquee behavior="scroll" direction="left" scrollamount="5">
+                    Welcome to aroma • a good beginning • starts with a happy marriage
+                </marquee>
+            </td>
+        </tr>
+    </table>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">Aroma Events</a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="signup.html" aria-current="page">Sign Up</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card form-card" style="max-width:680px;margin:36px auto">
+      <h1 class="page-title">Create an account</h1>
+      <p class="lead">Join <strong>Amora Events</strong> to manage bookings and share your preferences with us.</p>
+
+      <form id="signupForm" novalidate>
+        <div class="form-row">
+          <label for="fullName">Full name <span class="required">*</span></label>
+          <input id="fullName" name="fullName" placeholder="Your full name" autocomplete="name" required />
+        </div>
+
+        <div class="form-row">
+          <label for="email">Email <span class="required">*</span></label>
+          <input id="email" name="email" type="email" placeholder="name@example.com" autocomplete="email" required />
+        </div>
+
+        <div class="form-row two-col">
+          <div>
+            <label for="password">Password <span class="required">*</span> <small class="muted">(min 8
+                chars)</small></label>
+            <div class="pw-wrap">
+              <input id="password" name="password" type="password" placeholder="At least 8 characters"
+                autocomplete="new-password" required />
+              <button type="button" class="pw-toggle" aria-label="Show password">Show</button>
+            </div>
+            <meter id="pwStrength" min="0" low="2" high="4" max="4" value="0" title="Password strength"></meter>
+            <div class="pw-hint muted">Use letters, numbers &amp; a symbol for a stronger password.</div>
+          </div>
+
+          <div>
+            <label for="passwordConfirm">Confirm password <span class="required">*</span></label>
+            <input id="passwordConfirm" name="passwordConfirm" type="password" placeholder="Repeat your password"
+              autocomplete="new-password" required />
+          </div>
+        </div>
+
+        <div id="signupError" class="error" role="status" aria-live="polite"></div>
+
+        <div class="form-row actions">
+          <button class="btn" type="submit">Create account</button>
+          <div id="signupMsg" class="muted" aria-live="polite"></div>
+        </div>
+
+
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">© Amora Events</div>
+  </footer>
+
+  <script src="scripts.js"></script>
+    <script>
+    // Minimal JS to toggle password visibility and basic password strength meter.
+    (function () {
+      const pw = document.getElementById('password');
+      const toggle = document.querySelector('.pw-toggle');
+      const meter = document.getElementById('pwStrength');
+
+      if (toggle && pw) {
+        toggle.addEventListener('click', () => {
+          if (pw.type === 'password') { pw.type = 'text'; toggle.textContent = 'Hide'; }
+          else { pw.type = 'password'; toggle.textContent = 'Show'; }
+        });
+
+        pw.addEventListener('input', () => {
+          const v = pw.value || '';
+          let score = 0;
+          if (v.length >= 8) score++;
+          if (/[A-Z]/.test(v)) score++;
+          if (/[0-9]/.test(v)) score++;
+          if (/[^A-Za-z0-9]/.test(v)) score++;
+          meter.value = Math.min(score, 4);
+        });
+      }
+
+      // Basic form validation: check required fields and password match.
+      const form = document.getElementById('signupForm');
+      const error = document.getElementById('signupError');
+      const confirm = document.getElementById('passwordConfirm');
+    })();
+  </script>
+
+</body>
+
+</html>
